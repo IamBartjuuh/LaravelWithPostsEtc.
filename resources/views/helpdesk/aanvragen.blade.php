@@ -6,7 +6,7 @@
     <div class="col-12">
         <h1 class="display-4">Aanvragen van {{ Auth::user()->name }}.</h1>
     </div>
-    <hr>
+    <hr style="width: 60em;">
     <div class="col-12">
         <p class="lead">
             @if($data['count'] < 2)
@@ -18,14 +18,29 @@
     </div>
 </div>
 <div class="container">
-@foreach($data['aangevraagd'] as $aanvraag)
-<div class="card col-md-4 col-sm-12">
-    <div class="card-body">
-    <h5 class="card-title">Probleem: {{App\Enums\SoortProbleem::getKey($aanvraag->Soortproblemen)}}</h5>
-    <p class="card-text">Beschrijving: {{$aanvraag->beschrijving}}</p>
-    <a href="/hulppagina/{{$aanvraag['id']}}"><button type="button" class="btn btn-primary">Bekijk aanvraag</button></a>
-    </div>
-</div>
-@endforeach
+@if($data['aangevraagd']->count() > 0)
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Naam aanvrager</th>
+        <th scope="col">Probleem met</th>
+        <th scope="col">Omschrijving / Bericht</th>
+        <th scope="col">Buttons</th>
+      </tr>
+    </thead>
+    <tbody>
+    @foreach($data['aangevraagd'] as $all)
+      <tr>
+        <th scope="row">{{$all->naam}}</th>
+        <td>{{App\Enums\SoortProbleem::getKey($all->Soortproblemen)}}</td>
+        <td>{{$all->beschrijving}}</td>
+        <td><a href="/hulppagina/{{$all['id']}}"><button type="button" class="btn btn-primary">Bekijk aanvraag</button></a></td>
+      </tr>
+    @endforeach
+    </tbody>
+  </table>
+  @else
+  <p>Er zijn geen aanvragen.</p>
+  @endif
 </div>
 @endsection
