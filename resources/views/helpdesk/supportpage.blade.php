@@ -21,8 +21,8 @@
         <div class="card-body">
             <div class="row">
                 <h5 class="card-title col align-self-start">{{$reactie->naam}}</h5> 
-                @if(Auth::user()->name == $reactie->naam)
-                <form action="/verwijder/reactie/{{$reactie['id']}}" style="display: inline;" method="POST">
+                @if(Auth::user()->id == $reactie->user_id)
+                <form action="/verwijder/reactie/{{$reactie['id']}}" style="display: inline; margin-right: 1em;" method="POST">
                     @csrf
                     <button type="button" class="btn btn-danger align-right btn-sm col align-self-end" data-toggle="modal" data-target="#Delete{{$reactie['id']}}"><i class="fas fa-trash-alt"></i> Verwijder</button>
                     <div class="modal fade" id="Delete{{$reactie['id']}}" tabindex="-1" role="dialog" aria-labelledby="DeleteLabel" aria-hidden="true">
@@ -57,7 +57,7 @@
             <label for="naam" class="offset-md-2 col-md-2 col-form-label text-md-left">Naam:</label>
             
             <div class="col-md-6">
-            <input type="text" maxlength="100" name="naam" id="aanvrager" class="form-control"  required value="{{ Auth::user()->name }}">
+            <input type="text" maxlength="100" name="naam" id="aanvrager" class="form-control"  required value="{{ Auth::user()->name }}" disabled>
             </div>
         </div>
         <div class="form-group row mb-0">

@@ -7,15 +7,19 @@
         <h1 class="display-4">Aanvragen van {{ Auth::user()->name }}.</h1>
     </div>
     <hr style="width: 60em;">
-    <div class="col-12">
-        <p class="lead">
-            @if($data['count'] < 2)
-            U heeft {{$data['count']}} aanvraag.
-            @else
-            U heeft {{$data['count']}} aanvragen.
-            @endif
-        </p>
-    </div>
+    <div class="container row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8 col-sm-12">
+          <p class="lead">
+              @if($data['count'] < 2)
+              U heeft {{$data['count']}} aanvraag.
+              @else
+              U heeft {{$data['count']}} aanvragen.
+              @endif
+          </p>
+      </div>
+      <div class="col-md-2"><a href="/aanvraag" class="btn btn-primary">Ticket aanmaken.</a></div>
+    </div>  
 </div>
 <div class="container">
 @if($data['aangevraagd']->count() > 0)

@@ -48,14 +48,14 @@ class HelpdeskController extends Controller
     public function reactie(Request $request, $id)
     {
         $request->validate([
-            'naam' => 'required|max:100',
+            'naam' => '',
             'email' => '',
             'reactie' => 'required|max:300',
             'aanvraag_id' => '',
         ]);
 
         $aanvraag = new ReactieModel;
-        $aanvraag->naam = $request->input('naam');
+        $aanvraag->naam = Auth::user()->name;
         $aanvraag->email = Auth::user()->email;
         $aanvraag->reactie = $request->input('reactie');
         $aanvraag->aanvraag_id = $id;
